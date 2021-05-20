@@ -25,6 +25,8 @@ def get_tmdb_id(imdb_id):
         '''SELECT tmdb_id FROM id_map WHERE imdb_id = ? ''',
         (imdb_id,)
     )
+    if result is None:
+        return None
     return result[0]
 
 
