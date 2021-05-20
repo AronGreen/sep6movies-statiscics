@@ -331,3 +331,4 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,pycharm
 
 *.db
+env*.pyc
