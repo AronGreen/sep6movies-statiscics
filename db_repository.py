@@ -17,6 +17,10 @@ def insert_imdb_rating(imdb_id, rating):
 
 
 def get_tmdb_id(imdb_id):
+    """
+    Try to get a tmdb id from the corresponding imdb id
+    :rtype: str | None
+    """
     result = __fetchone(
         '''SELECT tmdb_id FROM id_map WHERE imdb_id = ? ''',
         (imdb_id,)
@@ -25,6 +29,10 @@ def get_tmdb_id(imdb_id):
 
 
 def get_imdb_id(tmdb_id):
+    """
+    Try to get a imdb id from the corresponding tmdb id
+    :rtype: str | None
+    """
     result = __fetchone(
         '''SELECT imdb_id FROM id_map WHERE tmdb_id = ? ''',
         (tmdb_id,)
@@ -35,6 +43,12 @@ def get_imdb_id(tmdb_id):
 
 
 def get_imdb_rating(imdb_id):
+    """
+    Try to get an imdb rating for a movie.
+    If the stored rating is older than 7 days,
+    it will be deleted and None returned.
+    :rtype: str | None
+    """
     result = __fetchone(
         '''SELECT imdb_rating, updated FROM imdb_ratings WHERE imdb_id = ? ''',
         (imdb_id,)

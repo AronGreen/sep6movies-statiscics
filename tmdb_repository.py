@@ -12,6 +12,7 @@ def find(imdb_id):
     TMDb reference: https://developers.themoviedb.org/3/find/find-by-id
     :param imdb_id: imdb id of object
     :return: dict that matches the imdb id can be a movie or person or None
+    :rtype: dict | None
     """
     print(f'find {imdb_id}')
     url = f'{__base_url}/find/{imdb_id}?{__api_key}&external_source=imdb_id'
@@ -29,18 +30,30 @@ def get_person_movie_credits(tmdb_id):
     Note that this includes both cast and crew credits.
     :param tmdb_id: person tmdb_id
     :return: dict of movie credits
+    :rtype: dict | None
     """
     print(f'get_person_movie_credits {tmdb_id}')
     url = f'{__base_url}/person/{tmdb_id}/movie_credits?{__api_key}&language=en-US'
-    return jsonpickle.decode(requests.request('GET', url).text)
+    resp = jsonpickle.decode(requests.request('GET', url).text)
+    if 'status_code' in resp:
+        return None
+    return resp
 
 
 def get_tmdb_id(imdb_id):
+    """
+    Try to get a tmdb id from the corresponding imdb id
+    :rtype: str | None
+    """
     api_result = find(imdb_id)
-    return api_result.get('id')
+    return api_result.get('id') or '-1'
 
 
 def get_imdb_id(tmdb_id):
+    """
+    Try to get a imdb id from the corresponding tmdb id
+    :rtype: str | None
+    """
     # afaik there is no way to know id a tmdb id is a movie or a person,
     # so working on an assumption that movies are requested more than
     # people, we check for movies first, then people if no movie was found

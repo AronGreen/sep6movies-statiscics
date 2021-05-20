@@ -8,6 +8,10 @@ from models import TMDBPersonCredit
 
 
 def get_actor_movies(imdb_id):
+    """
+    Get a list of movie credits for a given actor
+    :rtype: list of TMDBPersonCredit
+    """
     tmdb_id = __get_tmdb_id(imdb_id)
     if tmdb_id is None:
         return None
@@ -21,8 +25,7 @@ def get_actor_movies(imdb_id):
 def find(imdb_id):
     """
     Find the movie or person that matches the provided imdb id or None.
-    :param imdb_id: imdb id of object
-    :return: object that matches the imdb id can be a movie or person or None
+    :rtype: dict | None
     """
     return tmdb_repository.find(imdb_id)
 
