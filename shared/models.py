@@ -21,42 +21,6 @@ class TMDBMovie(object):
         )
 
 
-class TMDBMovieCredit(object):
-    __slots__ = ('name', 'person_tmdb_id', 'character')
-
-    def __init__(self, name, person_tmdb_id, character):
-        self.name = name
-        self.person_tmdb_id = person_tmdb_id
-        self.character = character
-
-    @staticmethod
-    def from_tmdb_movie_credits_response_item(resp):
-        return TMDBMovieCredit(
-            name=resp['name'],
-            person_tmdb_id=resp['id'],
-            character=resp['character']
-        )
-
-
-class TMDBPersonCredit(object):
-    __slots__ = ('title', 'movie_tmdb_id', 'movie_imdb_id', 'character', 'released', 'imdb_rating')
-
-    def __init__(self, title, movie_tmdb_id, character, released):
-        self.title = title
-        self.movie_tmdb_id = movie_tmdb_id
-        self.character = character
-        self.released = released
-
-    @staticmethod
-    def from_tmdb_person_credits_response_item(resp):
-        return TMDBPersonCredit(
-            title=resp.get('title'),
-            movie_tmdb_id=resp.get('id'),
-            character=resp.get('character'),
-            released=resp.get('release_date')
-        )
-
-
 class OMDBMovie(object):
     __slots__ = ('title', 'released', 'director', 'imdb_rating', 'imdb_id', 'box_office')
 
@@ -77,4 +41,46 @@ class OMDBMovie(object):
             imdb_rating=resp['imdbRating'],
             imdb_id=resp['imdbID'],
             box_office=['BoxOffice']
+        )
+
+
+class TMDBMovieCredit(object):
+    """
+    Represents an person in the list of credits for a movie
+    """
+    __slots__ = ('name', 'person_tmdb_id', 'character')
+
+    def __init__(self, name, person_tmdb_id, character):
+        self.name = name
+        self.person_tmdb_id = person_tmdb_id
+        self.character = character
+
+    @staticmethod
+    def from_tmdb_movie_credits_response_item(resp):
+        return TMDBMovieCredit(
+            name=resp['name'],
+            person_tmdb_id=resp['id'],
+            character=resp['character']
+        )
+
+
+class TMDBPersonCredit(object):
+    """
+    Represents an entry in a persons work history - a movie they worked on
+    """
+    __slots__ = ('title', 'movie_tmdb_id', 'movie_imdb_id', 'character', 'released', 'imdb_rating')
+
+    def __init__(self, title, movie_tmdb_id, character, released):
+        self.title = title
+        self.movie_tmdb_id = movie_tmdb_id
+        self.character = character
+        self.released = released
+
+    @staticmethod
+    def from_tmdb_person_credits_response_item(resp):
+        return TMDBPersonCredit(
+            title=resp.get('title'),
+            movie_tmdb_id=resp.get('id'),
+            character=resp.get('character'),
+            released=resp.get('release_date')
         )

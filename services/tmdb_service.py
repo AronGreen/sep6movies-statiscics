@@ -1,13 +1,8 @@
-import db_repository
-import tmdb_repository
-from models import TMDBPersonCredit
-
-#
-# __api_key = 'api_key=ec7d92089b9c745af52acceedbfe66fc'
-# __base_url = 'https://api.themoviedb.org/3/'
+from repositories import tmdb_repository, db_repository
+from shared.models import TMDBPersonCredit
 
 
-def get_actor_movies(imdb_id):
+def get_actor_movie_credits(imdb_id):
     """
     Get a list of movie credits for a given actor
     :rtype: list of TMDBPersonCredit
@@ -22,15 +17,7 @@ def get_actor_movies(imdb_id):
     return credit_list
 
 
-def find(imdb_id):
-    """
-    Find the movie or person that matches the provided imdb id or None.
-    :rtype: dict | None
-    """
-    return tmdb_repository.find(imdb_id)
-
-
-def get_get_imdb_id(movie_tmdb_id):
+def get_imdb_id(movie_tmdb_id):
     return db_repository.get_imdb_id(movie_tmdb_id) or \
            __get_imdb_id(movie_tmdb_id)
 

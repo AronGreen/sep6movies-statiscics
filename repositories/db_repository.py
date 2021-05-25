@@ -1,5 +1,8 @@
 import sqlite3
 from _datetime import datetime, timedelta
+from shared import settings
+#
+# DB_PATH = settings.sqlite_db_name()
 
 
 def insert_id_map(imdb_id, tmdb_id):
@@ -71,7 +74,7 @@ def __delete_imdb_rating(imdb_id):
 
 
 def __execute_p(sql, parameters=...):
-    con = sqlite3.connect('example.db')
+    con = sqlite3.connect(settings.SQLITE_DB_NAME)
     cur = con.cursor()
     cur.execute(sql, parameters)
     con.commit()
@@ -79,7 +82,7 @@ def __execute_p(sql, parameters=...):
 
 
 def __execute(sql):
-    con = sqlite3.connect('example.db')
+    con = sqlite3.connect(settings.SQLITE_DB_NAME)
     cur = con.cursor()
     cur.execute(sql)
     con.commit()
@@ -87,7 +90,7 @@ def __execute(sql):
 
 
 def __fetchone(sql, parameters=...):
-    con = sqlite3.connect('example.db')
+    con = sqlite3.connect(settings.SQLITE_DB_NAME)
     cur = con.cursor()
     cur.execute(sql, parameters)
     result = cur.fetchone()
