@@ -1,17 +1,11 @@
-import db_repository
-import omdb_repository
+from repositories import omdb_repository, db_repository
 
 
 def get_imdb_rating(imdb_id):
     rating = db_repository.get_imdb_rating(imdb_id)
     if rating is None:
-        rating = __get_imdb_rating(imdb_id)
+        rating = __get_imdb_rating_from_api(imdb_id)
     return rating
-
-
-def __get_imdb_rating(imdb_id):
-    return db_repository.get_imdb_rating(imdb_id) or\
-           __get_imdb_rating_from_api(imdb_id)
 
 
 def __get_imdb_rating_from_api(imdb_id):

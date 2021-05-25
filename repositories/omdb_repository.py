@@ -1,9 +1,8 @@
 import jsonpickle
 import requests
-import settings
+from shared import settings
 
-
-__api_key = f'apikey={settings.omdb_api_key()}'
+__api_key = f'apikey={settings.OMDB_API_KEY}'
 __base_url = 'https://www.omdbapi.com/'
 
 
