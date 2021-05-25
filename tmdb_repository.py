@@ -1,8 +1,8 @@
-
 import jsonpickle
 import requests
+import settings
 
-__api_key = 'api_key=ec7d92089b9c745af52acceedbfe66fc'
+__api_key = f'api_key={settings.tmdb_api_key()}'
 __base_url = 'https://api.themoviedb.org/3/'
 
 

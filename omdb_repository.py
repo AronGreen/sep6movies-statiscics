@@ -1,9 +1,9 @@
 import jsonpickle
 import requests
-from datetime import datetime, timedelta
+import settings
 
 
-__api_key = 'apikey=d3233e61'
+__api_key = f'apikey={settings.omdb_api_key()}'
 __base_url = 'https://www.omdbapi.com/'
 
 

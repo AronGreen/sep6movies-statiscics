@@ -1,5 +1,4 @@
 
-
 class TMDBMovie(object):
     __slots__ = ('tmdb_id', 'imdb_id', 'title', 'released', 'budget', 'imdb_rating')
 
@@ -40,7 +39,7 @@ class TMDBMovieCredit(object):
 
 
 class TMDBPersonCredit(object):
-    __slots__ = ('title', 'movie_tmdb_id', 'character', 'released', 'imdb_rating')
+    __slots__ = ('title', 'movie_tmdb_id', 'movie_imdb_id', 'character', 'released', 'imdb_rating')
 
     def __init__(self, title, movie_tmdb_id, character, released):
         self.title = title
@@ -64,7 +63,7 @@ class OMDBMovie(object):
     def __init__(self, title, released, director, imdb_rating, imdb_id, box_office):
         self.title = title
         self.released =released
-        self.director =director
+        self.director = director
         self.imdb_rating = imdb_rating
         self.imdb_id = imdb_id
         self.box_office = box_office
