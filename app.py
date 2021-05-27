@@ -1,7 +1,6 @@
 import concurrent.futures
 from flask import Flask, Response
 import jsonpickle
-import numpy
 from services import omdb_service, tmdb_service
 from shared import settings
 
