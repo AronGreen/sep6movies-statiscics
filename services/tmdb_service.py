@@ -11,6 +11,8 @@ def get_actor_movie_credits(imdb_id):
     if tmdb_id is None:
         return None
     result = tmdb_repository.get_person_movie_credits(tmdb_id)
+    if result is None:
+        return None
     credit_list = []
     for movie in result['cast']:
         credit_list.append(TMDBPersonCredit.from_tmdb_person_credits_response_item(movie))

@@ -43,10 +43,12 @@ def get_person_movie_credits(tmdb_id):
 def get_tmdb_id(imdb_id):
     """
     Try to get a tmdb id from the corresponding imdb id
-    :rtype: str | None
+    :rtype: str
     """
     api_result = find(imdb_id)
-    return api_result.get('id') or '-1'
+    if api_result is None:
+        return '-1'
+    return api_result.get('id', '-1')
 
 
 def get_imdb_id(tmdb_id):
