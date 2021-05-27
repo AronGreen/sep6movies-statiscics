@@ -1,6 +1,7 @@
 import concurrent.futures
 from flask import Flask, Response
 import jsonpickle
+import numpy
 from services import omdb_service, tmdb_service
 from shared import settings
 
@@ -19,7 +20,7 @@ def actor_movie_ratings(imdb_id):
         futures = [executor.submit(__map_movie_credit_imdb_info, movie) for movie in movie_credits]
         concurrent.futures.wait(futures, return_when=concurrent.futures.ALL_COMPLETED)
 
-    return __json_response(jsonpickle.encode({'movies': movie_credits}, unpicklable=False))
+    return __json_response(jsonpickle.encode(movie_credits, unpicklable=False))
 
 
 def __map_movie_credit_imdb_info(m):
