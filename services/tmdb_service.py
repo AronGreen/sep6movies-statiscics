@@ -2,6 +2,15 @@ from repositories import tmdb_repository, db_repository
 from shared.models import TMDBPersonCredit
 
 
+def search_people(search_string):
+    results = tmdb_repository.search_people(search_string)
+    mapped = [
+        {'name': result.get('name'),
+         'imdb_id': get_imdb_id(result.get('id'))}
+        for result in results]
+    return [filtered for filtered in mapped if filtered.get('imdb_id') != '-1' ]
+
+
 def get_actor_movie_credits(imdb_id):
     """
     Get a list of movie credits for a given actor

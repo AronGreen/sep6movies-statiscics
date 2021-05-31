@@ -24,6 +24,15 @@ def find(imdb_id):
     return None
 
 
+def search_people(search_string):
+    url = f'{__base_url}search/person?{__api_key}&query={search_string}'
+    print(url)
+    resp = jsonpickle.decode(requests.request('GET', url).text)
+    if 'status_message' in resp:
+        return []
+    return resp.get('results')
+
+
 def get_person_movie_credits(tmdb_id):
     """
     Get a dict with all movie credits for a person.

@@ -1,5 +1,5 @@
 import concurrent.futures
-from flask import Flask, Response, abort
+from flask import Flask, Response, request
 import jsonpickle
 from services import omdb_service, tmdb_service
 from shared import settings
@@ -10,6 +10,12 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return 'Hello World!'
+
+
+@app.route('/search/people')
+def search_people():
+    search_string = request.args.get('query')
+    return __json_response(tmdb_service.search_people(search_string))
 
 
 @app.route('/tmdb_id/<imdb_id>')
