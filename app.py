@@ -12,6 +12,16 @@ def hello_world():
     return 'Hello World!'
 
 
+@app.route('/tmdb_id/<imdb_id>')
+def get_tmdb_id(imdb_id):
+    return __json_response(tmdb_service.get_tmdb_id(imdb_id))
+
+
+@app.route('/imdb_id/<tmdb_id>')
+def get_imdb_id(tmdb_id):
+    return __json_response(tmdb_service.get_imdb_id(tmdb_id))
+
+
 @app.route('/actor/<imdb_id>/movieratings')
 def actor_movie_ratings(imdb_id):
     movie_credits = tmdb_service.get_actor_movie_credits(imdb_id)
