@@ -58,9 +58,11 @@ def get_imdb_rating(imdb_id):
     )
     if result is None:
         return None
-    if datetime.strptime(result[1], '%Y-%m-%d %H:%M:%S') < (datetime.now() - timedelta(days=7)):
-        __delete_imdb_rating(imdb_id)
-        return None
+    # TODO: re-implement this with mysql in mind
+    # we dont want too old ratings
+    # if datetime.strptime(result[1], '%Y-%m-%d %H:%M:%S') < (datetime.now() - timedelta(days=7)):
+    #     __delete_imdb_rating(imdb_id)
+    #     return None
     return result[0]
 
 
