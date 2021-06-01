@@ -47,7 +47,6 @@ def __get_imdb_id(tmdb_id):
 
 def __get_tmdb_id_from_api(imdb_id):
     tmdb_id = tmdb_repository.get_tmdb_id(imdb_id)
-    print(f'get id result: {tmdb_id}')
     if bool(tmdb_id):
         db_repository.insert_id_map(imdb_id=imdb_id, tmdb_id=tmdb_id)
     return tmdb_id

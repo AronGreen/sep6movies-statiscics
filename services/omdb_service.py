@@ -10,7 +10,7 @@ def get_imdb_rating(imdb_id):
 
 def __get_imdb_rating_from_api(imdb_id):
     movie = omdb_repository.get_movie(imdb_id)
+    db_repository.insert_imdb_rating(imdb_id, movie.get('imdbRating', '-1'))
     if movie is not None:
-        db_repository.insert_imdb_rating(imdb_id, movie.get('imdbRating'))
         return movie.get('imdbRating')
-    return None
+    return '-1'

@@ -41,7 +41,6 @@ def get_person_movie_credits(tmdb_id):
     :return: dict of movie credits
     :rtype: dict | None
     """
-    print(f'get_person_movie_credits {tmdb_id}')
     url = f'{__base_url}/person/{tmdb_id}/movie_credits?{__api_key}&language=en-US'
     resp = jsonpickle.decode(requests.request('GET', url).text)
     if 'status_code' in resp:
@@ -75,14 +74,12 @@ def get_imdb_id(tmdb_id):
 
 
 def __get_imdb_id_from_movie(tmdb_id):
-    print(f'__get_imdb_id_from_movie {tmdb_id}')
     url = f'{__base_url}/movie/{tmdb_id}/external_ids?{__api_key}'
     result = jsonpickle.decode(requests.request('GET', url).text)
     return result.get('imdb_id')
 
 
 def __get_imdb_id_from_person(tmdb_id):
-    print(f'__get_imdb_id_from_person {tmdb_id}')
     url = f'{__base_url}/person/{tmdb_id}/external_ids?{__api_key}'
     result = jsonpickle.decode(requests.request('GET', url).text)
     return result.get('imdb_id')
